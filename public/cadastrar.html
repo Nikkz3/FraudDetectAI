@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro - FraudDetect AI</title>
+
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🛡️ Cadastro</h1>
+
+    <input
+        type="text"
+        id="nome"
+        placeholder="Digite seu nome"
+    >
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Digite seu email"
+    >
+
+    <input
+        type="password"
+        id="senha"
+        placeholder="Digite sua senha"
+    >
+
+    <button onclick="cadastrar()">
+        Cadastrar
+    </button>
+
+    <br><br>
+
+    <a href="login.html">
+        Já tenho uma conta
+    </a>
+
+</div>
+
+<script>
+
+async function cadastrar() {
+
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+    try {
+
+        const resposta = await fetch(
+            "/cadastro",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome,
+                    email,
+                    senha
+                })
+            }
+        );
+
+        const dados = await resposta.json();
+
+        console.log("DADOS COMPLETOS:");
+        console.log(dados);
+
+        console.log("NOME:");
+        console.log(dados.nome);
+
+        alert(dados.mensagem);
+
+        if (resposta.ok) {
+
+            console.log("Nome recebido:", dados.nome);
+
+            localStorage.setItem(
+                "usuario",
+                dados.nome
+            );
+
+            window.location.href = "site.html";
+        }
+
+    } catch (erro) {
+
+        console.error(erro);
+        alert("Erro ao conectar com o servidor");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(-45deg, #141e30, #3b5879, #0b191f, #1d4353);
+    background-size: 400% 400%;
+    animation: gradient 12s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    overflow: hidden;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    background: rgba(30, 30, 30, 0.95);
+    padding: 40px;
+    border-radius: 18px;
+    width: 520px;
+    box-shadow: 0 15px 40px rgba(52, 206, 72, 0.6);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 1s ease;
+}
+
+input,
+textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    
+}
+
+textarea {
+    height: 150px;
+    resize: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background:  #00e676;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background:  #00e676;
+}
+
+a {
+    color: #00e676;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #00ff80;
+    text-decoration: underline;
+}
+
+/* USUÁRIO NO CANTO */
+.usuario-box {
+    position: absolute;
+    top: -60px;
+    left: -10px;
+    background: #2563eb;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    
+}
+

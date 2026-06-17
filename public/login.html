@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FraudDetect AI</title>
+
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="login-box">
+
+            <h1>🔐 Login</h1>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Digite seu email"
+            >
+
+            <input
+                type="password"
+                id="senha"
+                placeholder="Digite sua senha"
+            >
+
+            <button id="btnLogin">
+                Entrar
+            </button>
+
+            <p>
+                Não possui conta?
+                <a href="cadastrar.html">Cadastre-se</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        document
+            .getElementById("btnLogin")
+            .addEventListener("click", login);
+
+        async function login() {
+
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            if(email === "" || senha === "") {
+
+                alert("Preencha todos os campos!");
+                return;
+
+            }
+
+            try {
+
+                const resposta = await fetch(
+                    "/login",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            email,
+                            senha
+                        })
+                    }
+                );
+
+                const dados = await resposta.json();
+
+                alert(dados.mensagem);
+
+                if (resposta.ok) {
+
+                    if (!dados.nome) {
+
+                        alert("Erro: nome do usuário não foi recebido.");
+                        console.log(dados);
+                        return;
+
+                    }
+
+                    localStorage.setItem(
+                        "usuario",
+                        dados.nome
+                    );
+
+                    window.location.href = "site.html";
+
+                }
+
+            } catch(erro) {
+
+                console.error(erro);
+                alert("Erro ao conectar com o servidor");
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
